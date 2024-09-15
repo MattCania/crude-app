@@ -1,5 +1,41 @@
+.section{
+	height: calc(100vh - 16vh);
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+}
+
+.tableTitle{
+	font-size: calc(2em + 1vw);
+}
+
 .table{
-	width: 90vw;
-	height: 90vh;
+	margin: 0;
+	width: 50vw;
+	height: auto;
+	min-height: 20vh;
 	border: 2px inset black;
+}
+
+.table td{
+	border: 2px solid white;
+}
+
+.updateBtn{
+	border: none;
+}
+
+.tdButton_update{
+	color: black;
+	font-weight: bold;
+	border-radius: 2em;
+	background-color: rgb(5, 91, 204);
+}
+
+.tdButton_delete{
+	color: black;
+	font-weight: bold;
+	border-radius: 2em;
+	background-color: rgb(186, 0, 0);
 }

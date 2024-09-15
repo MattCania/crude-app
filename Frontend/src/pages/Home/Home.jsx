@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react';
 import styles from './Home.module.css';
+import Header from '../../partials/Header/Header';
+import Footer from '../../partials/Footer/Footer';
 
 function Home (){
 	const [result, setResult] = useState([]);
@@ -7,13 +9,22 @@ function Home (){
 	useEffect(() => {
 		fetch('/api/home')
 			.then(res => res.json())
-			.then(result = setResult(result))
+			.then(result => setResult(result))
 			.catch(err => console.error(err))
 	}, []);
 
 	return (
 		<>
-			<h1>BSIT-2B</h1>
+			<Header/>
+
+
+			{(typeof result === 'undefined') ? 
+			<p>Loading...</p> :
+
+			<section className={styles.section}>
+
+			<h1 className={styles.tableTitle}>BSIT-2B</h1>
+			
 			<table className={styles.table}>
 				<thead>
 					<tr>
@@ -24,18 +35,27 @@ function Home (){
 						<td>Student GWA</td>
 					</tr>
 				</thead>
-				<tbody>
-					{result.map(id =>{
-						<tr key={id.id}>
-							<td>{id.id}</td>
-							<td>{id.student_id}</td>
-							<td>{id.student_name}</td>
-							<td>{id.age}</td>
-							<td>{id.student_GWA}</td>
-						</tr>
-					})}
+				<tbody className={styles.tbody}>
+					{result.map((student) =>(
+						<>
+							<tr key={student.id}>
+								<td>{student.id}</td>
+								<td>{student.student_id}</td>
+								<td>{student.student_name}</td>
+								<td>{student.age}</td>
+								<td>{student.student_GWA}</td>
+								<td><button className={styles.tdButton_update}>update</button></td>
+								<td><button className={styles.tdButton_delete}>delete</button></td>
+							</tr>
+						</>
+					))}
 				</tbody>
 			</table>
+			</section>
+			}
+
+
+			<Footer/>
 		</>
 	);
 }

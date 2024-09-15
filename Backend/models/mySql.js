@@ -14,14 +14,17 @@ const selectValues = (callback) => {
 
 	pool.query(selectQry, (err, result) => {
 		if (err) {
-			console.log('Query Error', err);
-			return callback(err);
+			console.error('Query Error', err);
+			return callback(err, null);
 		}
-		callback(null, result);
+		return callback(null, result);
 	})
-
 }
 
-exports = {
+const updateValues = (callback, data) => {
+	
+}
+
+module.exports = {
 	selectValues
 }
