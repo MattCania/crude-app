@@ -9,7 +9,7 @@ const pool = mysql.createPool({
 	connectionLimit: 10
 })
 
-const selectValues = (data, callback) => {
+const selectValues = (callback) => {
 	const selectQry = 'SELECT * FROM bsit2b';
 
 	pool.query(selectQry, (err, result) => {
@@ -19,8 +19,6 @@ const selectValues = (data, callback) => {
 		}
 		callback(null, result);
 	})
-
-
 
 }
 
