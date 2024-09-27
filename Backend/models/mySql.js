@@ -21,10 +21,75 @@ const selectValues = (callback) => {
 	})
 }
 
-const updateValues = (callback, data) => {
+
+const deleteValues = (id, callback) => {
 	
+	const deleteQry = `DELETE FROM bsit2b WHERE id = ?`;
+	const resetId = 'ALTER TABLE bsit2b AUTO_INCREMENT = 1';
+
+	pool.query(deleteQry, [id], (err, result) => {
+		if (err) {
+			console.error('Query Error', err);
+			return callback(err, null);
+		}
+		pool.query(resetId, (resetErr, resetResult) => {
+			if (resetErr) {
+				console.error('Reset ID Error', resetErr);
+				return callback(resetErr, null); // Pass the reset error back if needed
+			}
+			return callback(null, result);
+		});
+	})
+}
+
+const adjustValues = (id, callback) =>{
+	const adjustQry = `UPDATE bsit2b SET id = id - 1 WHERE id > ?`;
+
+	pool.query(adjustQry, [id], (err, result) => {
+		if(err) {
+			console.error('Query Error', err);
+			return callback(err, null);
+		}
+
+		pool.query('ALTER TABLE bsit2b AUTO_INCREMENT = 1', (err, result) => {
+			if (err) {
+				console.error('Query Error', err)
+				return callback(err, null);
+			}
+			return callback(null, result);
+		})
+		return callback(null, result)
+	})
+}
+
+const insertValues = (data, callback) => {
+	const {
+		StudentID,
+		StudentName,
+		StudentAge,
+		StudentGWA
+	} = data;
+
+	if (!StudentID || !StudentName || !StudentAge || !StudentGWA){
+		return callback (new Error('Missing Required Fields'));
+	}
+
+	const insertQry = 'INSERT INTO bsit2b (student_id, student_name, age, GWA) VALUES (?, ?, ?, ?)';
+
+	pool.query(insertQry, [StudentID, StudentName, StudentAge, StudentGWA], (err, result) => {
+		if (err){
+			console.error('Database query error:', err)
+			return callback(err)
+		}
+		callback(null, result)
+	})
+
+
 }
 
 module.exports = {
-	selectValues
+	selectValues,
+	deleteValues,
+	insertValues,
+	adjustValues
 }
