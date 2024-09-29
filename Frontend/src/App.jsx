@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home/Home'
-import PopUp from './partials/PopUp/PopUp';
-import './App.css'
+import Add from './partials/Add/Add';
 import Header from './partials/Header/Header';
 
+import './App.css'
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Navigate to='/home' replace/>}/>
-        <Route path='/popup' element={<PopUp/>}/>
+        <Route path='/add' element={<Add/>}/>
         <Route path='/home' element={<Home/>}/>
       </Routes>
     </Router>

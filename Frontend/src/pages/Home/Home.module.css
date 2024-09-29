@@ -2,8 +2,10 @@
 	height: calc(100vh - 16vh);
 	display: flex;
 	flex-direction: column;
+	gap: 1em;
 	justify-content: start;
 	align-items: center;
+	overflow: auto;
 }
 
 .tableTitle{
@@ -12,7 +14,8 @@
 
 .table{
 	margin: 0;
-	width: 50vw;
+	font-size: calc(10px + .5vw);
+	width: calc(20em + 26vw);
 	height: auto;
 	min-height: 20vh;
 	border: 2px inset black;
@@ -38,4 +41,41 @@
 	font-weight: bold;
 	border-radius: 2em;
 	background-color: rgb(186, 0, 0);
+}
+
+.addValues{
+	color: white;
+	text-decoration: none;
+	font-size: calc(12px + .25vw);
+	width: calc(6em + 2vw);
+	border: 1px inset darkgray;
+}
+
+.addValues:active{
+	color: gray;
+	border: 1px solid darkgray;
+}
+
+.popUp{
+	position: fixed;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	background-color: rgb(42, 42, 42);
+	border: 2px inset black;
+	margin: auto;
+	width: calc(16em + 16vw);
+	height: calc(20em + 16vh);
+}
+
+.popUp form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }

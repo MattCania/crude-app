@@ -1,0 +1,68 @@
+.general{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.section{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: calc(16em + 20vw);
+	height: calc(16em + 24vh);
+	border: black inset 2px;
+}
+
+.section form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.section form label{
+	font-size: calc(16px + .5vw);
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
+.section form input[type = text], .section form input[type = number]{
+	font-size: calc(10px + .5vw);
+	width: calc(12em + 12vw);
+	height: calc(1em + 1vh);
+}
+
+.section form input[type=submit]{
+	cursor: pointer;
+	background-color: #242424;
+	outline: none;
+	width: calc(3em + 5vw);	
+	height: calc(2em + 1vh);
+	border: 2px inset darkgray;
+	margin: 16px;
+}
+
+.section form input[type=submit]:active{
+	color: gray;
+	border: 2px solid darkgray;
+}
+
+.returnHome{
+	color: white;
+	text-decoration: none;
+	font-size: calc(12px + .25vw);
+	width: calc(6em + 2vw);
+	border: 1px inset darkgray;
+	margin: 1em;
+}
+
+.returnHome:active{
+	color: gray;
+	border: 1px solid darkgray;
+}
+
+.promptAdded{
+	color: greenyellow;
+}

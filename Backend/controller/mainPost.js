@@ -12,4 +12,12 @@ router.post('/insertStudent', (req,res) => {
 	})
 })
 
+router.post('/adjustStudent/:id', (req, res) => {
+	const data = req.body;
+
+	databaseHandler.adjustValues(data, (err, result) => {
+		if (err) return res.json({ error: err.message });
+		return res.json(result)
+	})
+})
 module.exports = router

@@ -20,9 +20,13 @@ function Home (){
 		  });
 		  
 		  if (response.ok) {
-			window.location.reload();
 			// Remove the deleted student from the state
-			setResult(result.filter(student => student.student_id !== id));
+			fetch('/api/home')
+			.then(res => res.json())
+			.then(result => setResult(result)) // Update the state with new data
+			.catch(err => console.error(err));
+
+			// setResult((prevResult) => prevResult.filter(student => student.id !== id));
 		  } else {
 			alert('Error deleting the student.');
 		  }
@@ -36,6 +40,9 @@ function Home (){
 		alert(`Alerted User ${userId}`)
 	}
 
+	//Update Values
+
+
 	return (
 		<>
 			<Header/>
@@ -44,7 +51,6 @@ function Home (){
 			<p>Loading...</p> :
 			
 			<section className={styles.section}>
-			<a href="/popup">Add Values</a>
 
 			<h1 className={styles.tableTitle}>BSIT-2B</h1>
 			
@@ -60,18 +66,19 @@ function Home (){
 				</thead>
 				<tbody className={styles.tbody}>
 					{result.map((student) =>(
-						<tr key={student.id}>
-							<td>{student.id}</td>
-							<td>{student.student_id}</td>
-							<td>{student.student_name}</td>
-							<td>{student.age}</td>
-							<td>{student.GWA}</td>
-							<td><button className={styles.tdButton_update} onClick={ () => alertUser(student.student_id)}>update</button></td>
-							<td><button className={styles.tdButton_delete} onClick={ () => deleteStudent(student.id)} >delete</button></td>
+						<tr key={student.ID}>
+							<td>{student.ID}</td>
+							<td>{student.Student_Id}</td>
+							<td>{student.Student_Name}</td>
+							<td>{student.Age}</td>
+							<td>{student.GWA.toFixed(2)}</td>
+							<td><button className={styles.tdButton_update} onClick={ () => alertUser(student.Student_Id)}>update</button></td>
+							<td><button className={styles.tdButton_delete} onClick={ () => deleteStudent(student.ID)} >delete</button></td>
 						</tr>
 					))}
 				</tbody>
 			</table>
+			<a className={styles.addValues} href="/add">Add Values</a>
 			</section>
 			}
 
