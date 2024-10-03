@@ -21,12 +21,13 @@ function Home (){
 		  
 		  if (response.ok) {
 			// Remove the deleted student from the state
+			setResult((prevResult) => prevResult.filter(student => student.id !== id));
+			
 			fetch('/api/home')
 			.then(res => res.json())
 			.then(result => setResult(result)) // Update the state with new data
 			.catch(err => console.error(err));
 
-			// setResult((prevResult) => prevResult.filter(student => student.id !== id));
 		  } else {
 			alert('Error deleting the student.');
 		  }
@@ -37,7 +38,7 @@ function Home (){
 	  };
 
 	const alertUser = (userId) => {
-		alert(`Alerted User ${userId}`)
+		alert(`Alerted User ${userId} (This function is in development)`)
 	}
 
 	//Update Values
@@ -52,7 +53,7 @@ function Home (){
 			
 			<section className={styles.section}>
 
-			<h1 className={styles.tableTitle}>BSIT-2B</h1>
+			<h1 className={styles.tableTitle}>Student Information</h1>
 			
 			<table className={styles.table}>
 				<thead>
