@@ -25,3 +25,16 @@ terminal 2:  Frontend Server
 
 chat nyoko kung may errors or sm shit
 gus2 q na mamatay
+
+e2 ung database named sya as 'crude_db'
+name ng table is 'bsit2b'
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int(11)      | NO   | PRI | NULL    | auto_increment |
+| student_id   | varchar(255) | YES  |     | NULL    |                |
+| student_name | varchar(255) | YES  |     | NULL    |                |
+| age          | int(255)     | YES  |     | NULL    |                |
+| GWA          | decimal(4,2) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+eto individual columns
