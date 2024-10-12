@@ -7,7 +7,7 @@ const pool = mysql.createPool({
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 	port: process.env.DB_PORT,
-	connectionLimit: 10,
+	connectionLimit: process.env.DB_CONNECTION_LIMIT,
 })
 
 const selectValues = (callback) => {
@@ -84,13 +84,26 @@ const insertValues = (data, callback) => {
 		}
 		callback(null, result)
 	})
-
-
+	
 }
+
+const closePool = (callback) => {
+    pool.end((err) => {
+        if (err) {
+            console.error('Error closing MySQL pool:', err);
+            return callback(err);
+        }
+        console.log('MySQL pool closed.');
+        callback(null);
+    });
+};
+
 
 module.exports = {
 	selectValues,
 	deleteValues,
 	insertValues,
-	adjustValues
+	adjustValues,
+	closePool,
+	pool
 }

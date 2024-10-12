@@ -79,3 +79,19 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.circles{
+	position: fixed;
+	height: 8em;
+	left: 50%;
+	top: 8em;
+	transform: translateX(-50%);
+}
+
+.promptAdded{
+	color: greenyellow;
+	position: fixed;
+	top: 10em;
+	left: 50%;
+	transform: translateX(-50%);
+}

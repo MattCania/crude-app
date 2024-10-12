@@ -1,9 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import styles from './Add.module.css';
+import loadBar from '../../assets/circles.svg';
 
 function Add() {
   const [displayPrompt, setDisplayPrompt] = useState(false);
-  const timeoutIdRef = useRef(null); // Ref to store the timeout ID so it can be cleared/reset
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const timeoutIdRef = useRef(null);
 
   function promptAdded() {
     setDisplayPrompt(true);
@@ -41,8 +44,12 @@ function Add() {
     const formData = {
       ...formValues,
     };
-
+    
     try {
+      setDisplayPrompt(false);
+      setLoading(true);
+      setDisable(true);
+
       const response = await fetch('/api/insertStudent', {
         method: 'POST',
         headers: {  
@@ -51,10 +58,12 @@ function Add() {
         body: JSON.stringify(formData),
       });
 
+      setload(true);
+
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-
+        
         setFormValues({
           StudentID: '2023XXXX',
           StudentName: 'default',
@@ -67,6 +76,10 @@ function Add() {
       }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      promptAdded();
+      setLoading(false);
+      setDisable(false);
     }
   };
 
@@ -87,16 +100,19 @@ function Add() {
 
             <label htmlFor="StudentGWA">GWA</label>
             <input id="StudentGWA" name="StudentGWA" type="number" step="0.01" value={formValues.StudentGWA} onChange={handleInputChange} />
-
-            <input onClick={promptAdded} type="submit" />
+            <input disabled={disable} type="submit" />
           </form>
         </div>
       </section>
 
       <a className={styles.returnHome} href="/home">Return home</a>
 
-	  {displayPrompt && (
-        <p className={styles.promptAdded}>Student Added Successfully!</p>
+	    {displayPrompt && (
+        <p className={styles.promptAdded}>Student Added Successfully!</p>  
+      )}
+
+      {loading && (
+        <img className={styles.circles} src={loadBar} alt="loading" /> 
       )}
 
     </div>
